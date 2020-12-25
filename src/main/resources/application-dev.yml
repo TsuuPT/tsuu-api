@@ -1,0 +1,12 @@
+logging:
+  level:
+    net.sandrohc.tsuu: DEBUG
+
+spring:
+  data:
+    postgres:
+      host: localhost
+      port: 12004
+      database: tsuu
+      username: tsuu
+      password: tsuu

@@ -1,0 +1,94 @@
+type Fansub {
+  id: ID!
+  slug: String!
+  name: String!
+  media: FansubMedia!
+  founder: String
+  foundedDate: String
+  releases: [Release]
+}
+
+input FansubInput {
+  name: String!
+#  media: FansubMediaInput
+  founder: String
+  foundedDate: String
+}
+
+
+type FansubMedia {
+  icon: Image
+  banner: Image
+}
+
+input FansubMediaInput {
+  icon: ImageInput
+  banner: ImageInput
+}
+
+
+type Media {
+  id: ID!
+  slug: String!
+  title: MediaTitle!
+  type: MediaType!
+  cover: Image
+  description(asHTML: Boolean = false): String
+}
+
+
+type MediaTitle {
+  default: String,
+  portuguese: String,
+  english: String,
+  romanji: String,
+  original: String,
+}
+
+
+enum MediaType {
+  ANIME
+  MANGA
+  NOVEL
+}
+
+
+type Release {
+  id: ID!
+  fansub: Fansub!
+  media: Media!
+  description(asHTML: Boolean = false): String
+  classifier: String
+  timestamp: String
+}
+
+
+type Image {
+  small: String
+  medium: String
+  large: String
+}
+
+input ImageInput {
+  small: String
+  medium: String
+  large: String
+}
+
+
+type Query {
+  fansubs: [Fansub]
+  media: [Media]
+  releases(fansubId: ID!): [Release]
+}
+
+
+type Mutation {
+   createFansub(fansub: FansubInput): Fansub
+}
+
+
+schema {
+  query: Query
+  mutation: Mutation
+}

@@ -1,0 +1,9 @@
+logging:
+  level:
+    net.sandrohc.tsuu: INFO
+
+spring:
+  flyway:
+    enabled: true
+    sql-migration-separator: '-'
+    sql-migration-prefix: ''
