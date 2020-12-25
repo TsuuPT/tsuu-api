@@ -1,9 +1,16 @@
 server:
-  port: ${PORT:12003}
+  port: ${PORT:12020}
 
 spring:
   application:
     name: tsuu-api
+  data:
+    postgres:
+      host: ${DB_HOST:localhost}
+      port: ${DB_PORT:5432}
+      database: ${DB_NAME:tsuu}
+      username: ${DB_USER:tsuu}
+      password: ${DB_PASS:tsuu}
   flyway:
     enabled: true
     sql-migration-separator: '-'
