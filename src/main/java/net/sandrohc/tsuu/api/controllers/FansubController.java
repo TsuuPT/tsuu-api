@@ -9,7 +9,7 @@ import net.sandrohc.tsuu.api.services.FansubService;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/fansubs")
+@RequestMapping("/")
 public class FansubController {
 
 	private final FansubService fansubService;
@@ -19,5 +19,10 @@ public class FansubController {
 //	public Flux<Fansub> getAll() {
 //		return fansubService.getAll();
 //	}
+
+	@RequestMapping
+	public String hello() {
+		return "HELLO";
+	}
 
 }
