@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import net.sandrohc.tsuu.api.model.Fansub;
 import net.sandrohc.tsuu.api.model.Media;
 import net.sandrohc.tsuu.api.repositories.MediaDao;
 
@@ -28,6 +27,12 @@ public class MediaServiceImpl implements MediaService {
 	public Mono<Media> getById(Long id) {
 		log.atInfo().log("Loading media %d", id);
 		return mediaDao.findById(id);
+	}
+
+	@Override
+	public Mono<Media> getBySlug(String slug) {
+		log.atInfo().log("Loading media '%s'", slug);
+		return mediaDao.findBySlug(slug);
 	}
 
 	@Override

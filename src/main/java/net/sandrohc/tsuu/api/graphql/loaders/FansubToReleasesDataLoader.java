@@ -1,4 +1,4 @@
-package net.sandrohc.tsuu.api.loaders;
+package net.sandrohc.tsuu.api.graphql.loaders;
 
 import java.util.List;
 
@@ -12,7 +12,6 @@ import reactor.core.publisher.Flux;
 
 import net.sandrohc.tsuu.api.model.Fansub;
 import net.sandrohc.tsuu.api.model.Release;
-import net.sandrohc.tsuu.api.services.FansubService;
 import net.sandrohc.tsuu.api.services.ReleaseService;
 
 @Component

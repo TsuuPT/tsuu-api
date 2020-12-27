@@ -1,4 +1,4 @@
-package net.sandrohc.tsuu.api.resolvers.types;
+package net.sandrohc.tsuu.api.graphql.types;
 
 import lombok.Value;
 

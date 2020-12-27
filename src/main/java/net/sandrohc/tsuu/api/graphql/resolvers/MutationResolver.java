@@ -1,4 +1,4 @@
-package net.sandrohc.tsuu.api.resolvers;
+package net.sandrohc.tsuu.api.graphql.resolvers;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import lombok.RequiredArgsConstructor;

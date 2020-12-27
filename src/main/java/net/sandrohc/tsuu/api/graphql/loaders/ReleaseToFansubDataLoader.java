@@ -1,4 +1,4 @@
-package net.sandrohc.tsuu.api.loaders;
+package net.sandrohc.tsuu.api.graphql.loaders;
 
 import org.dataloader.BatchLoader;
 import org.dataloader.DataLoader;
@@ -27,7 +27,7 @@ public class ReleaseToFansubDataLoader extends DataLoader<Release, Fansub> {
 	@NotNull
 	private static BatchLoader<Release, Fansub> batchLoader(FansubService fansubService) {
 		return releases -> Flux.fromIterable(releases)
-				.flatMap(release -> fansubService.getById(release.getId()))
+				.flatMap(release -> fansubService.getById(release.getFansubId()))
 				.collectList()
 				.toFuture();
 	}

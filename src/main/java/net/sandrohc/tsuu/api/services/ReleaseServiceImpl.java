@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import net.sandrohc.tsuu.api.model.Fansub;
 import net.sandrohc.tsuu.api.model.Release;
 import net.sandrohc.tsuu.api.repositories.ReleaseDao;
 
@@ -20,8 +19,14 @@ public class ReleaseServiceImpl implements ReleaseService {
 
 	@Override
 	public Flux<Release> getAllByFansubId(Long fansubId) {
-		log.atInfo().log("Loading all releases for fansub: %d", fansubId);
+		log.atInfo().log("Loading all releases for fansub %d", fansubId);
 		return releaseDao.findAllByFansubIdOrderByTimestampDesc(fansubId);
+	}
+
+	@Override
+	public Mono<Release> getById(Long id) {
+		log.atInfo().log("Loading release %d", id);
+		return releaseDao.findById(id);
 	}
 
 	@Override

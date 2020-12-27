@@ -7,7 +7,11 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import net.sandrohc.tsuu.api.model.Fansub;
+import net.sandrohc.tsuu.api.model.FansubLink;
+import net.sandrohc.tsuu.api.model.FansubMember;
 import net.sandrohc.tsuu.api.repositories.FansubDao;
+import net.sandrohc.tsuu.api.repositories.FansubLinkDao;
+import net.sandrohc.tsuu.api.repositories.FansubMemberDao;
 
 @Service
 @Flogger
@@ -15,6 +19,8 @@ import net.sandrohc.tsuu.api.repositories.FansubDao;
 public class FansubServiceImpl implements FansubService {
 
 	private final FansubDao fansubDao;
+	private final FansubLinkDao fansubLinkDao;
+	private final FansubMemberDao fansubMemberDao;
 
 
 	@Override
@@ -27,6 +33,22 @@ public class FansubServiceImpl implements FansubService {
 	public Mono<Fansub> getById(Long id) {
 		log.atInfo().log("Loading fansub %d", id);
 		return fansubDao.findById(id);
+	}
+
+	@Override
+	public Mono<Fansub> getBySlug(String slug) {
+		log.atInfo().log("Loading fansub '%s'", slug);
+		return fansubDao.findBySlug(slug);
+	}
+
+	@Override
+	public Flux<FansubLink> getLinks(Long id) {
+		return fansubLinkDao.findByFansubId(id);
+	}
+
+	@Override
+	public Flux<FansubMember> getMembers(Long id) {
+		return fansubMemberDao.findByFansubId(id);
 	}
 
 	@Override

@@ -3,9 +3,9 @@ type Fansub {
   slug: String!
   name: String!
   media: FansubMedia!
-  founder: String
-  foundedDate: String
-  releases: [Release]
+  links: [FansubLink]!
+  members: [FansubMember]!
+  releases: [Release]!
 }
 
 input FansubInput {
@@ -24,6 +24,21 @@ type FansubMedia {
 input FansubMediaInput {
   icon: ImageInput
   banner: ImageInput
+}
+
+
+type FansubLink {
+  id: ID!
+  link: String!
+  linkType: LinkType!
+}
+
+type FansubMember {
+  id: ID!
+  name: String!
+  role: String
+  contact: String
+  contactType: LinkType
 }
 
 
@@ -52,6 +67,15 @@ enum MediaType {
   NOVEL
 }
 
+enum LinkType {
+  WEBSITE
+  EMAIL
+  FACEBOOK
+  TWITTER
+  INSTAGRAM
+  DISCORD
+}
+
 
 type Release {
   id: ID!
@@ -78,8 +102,13 @@ input ImageInput {
 
 type Query {
   fansubs: [Fansub]
-  media: [Media]
-  releases(fansubId: ID!): [Release]
+  fansub(slug: String!): Fansub!
+
+  medias: [Media]!
+  media(id: String!): Media
+
+  releases(fansubId: ID!): [Release]!
+  release(id: ID!): Release
 }
 
 

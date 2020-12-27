@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
+import net.sandrohc.tsuu.api.model.enums.MediaType;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

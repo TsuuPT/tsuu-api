@@ -9,7 +9,10 @@ public interface MediaService {
 
 	Flux<Media> getAll();
 
+	// TODO: cache this
 	Mono<Media> getById(Long id);
+
+	Mono<Media> getBySlug(String slug);
 
 	Mono<Media> save(Media fansub);
 

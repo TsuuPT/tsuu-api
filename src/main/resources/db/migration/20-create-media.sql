@@ -1,6 +1,5 @@
 create table media (
-    id               serial
-        constraint media_pk primary key,
+    id               serial constraint media_pk primary key,
     slug             text not null,
     title_portuguese text,
     title_english    text,

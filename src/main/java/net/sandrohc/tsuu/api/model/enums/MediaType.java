@@ -1,4 +1,4 @@
-package net.sandrohc.tsuu.api.model;
+package net.sandrohc.tsuu.api.model.enums;
 
 public enum MediaType {
 	ANIME,

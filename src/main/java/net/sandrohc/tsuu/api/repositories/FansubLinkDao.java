@@ -4,11 +4,11 @@ import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 
-import net.sandrohc.tsuu.api.model.Release;
+import net.sandrohc.tsuu.api.model.FansubLink;
 
 @Repository
-public interface ReleaseDao extends ReactiveCrudRepository<Release, Long> {
+public interface FansubLinkDao extends ReactiveCrudRepository<FansubLink, Long> {
 
-	Flux<Release> findAllByFansubIdOrderByTimestampDesc(Long fansubId);
+	Flux<FansubLink> findByFansubId(Long fansubId);
 
 }

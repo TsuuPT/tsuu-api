@@ -5,21 +5,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
+import net.sandrohc.tsuu.api.model.enums.LinkType;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Fansub {
+public class FansubMember {
 
 	private @Id Long id;
-	private String slug;
+	private Long fansubId;
 	private String name;
-
-	private String iconSmall;
-	private String iconMedium;
-	private String iconLarge;
-
-	private String bannerSmall;
-	private String bannerMedium;
-	private String bannerLarge;
+	private String role;
+	private String contact;
+	private LinkType contactType;
 
 }

@@ -1,12 +1,12 @@
-package net.sandrohc.tsuu.api.resolvers;
+package net.sandrohc.tsuu.api.graphql.resolvers;
 
 import com.coxautodev.graphql.tools.GraphQLResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import net.sandrohc.tsuu.api.model.Media;
-import net.sandrohc.tsuu.api.resolvers.types.ImageType;
-import net.sandrohc.tsuu.api.resolvers.types.MediaTitleType;
+import net.sandrohc.tsuu.api.graphql.types.ImageType;
+import net.sandrohc.tsuu.api.graphql.types.MediaTitleType;
 
 @Component
 @RequiredArgsConstructor
