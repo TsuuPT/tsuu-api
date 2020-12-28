@@ -2,6 +2,7 @@ type Fansub {
   id: ID!
   slug: String!
   name: String!
+  description(asHTML: Boolean = true): String
   media: FansubMedia!
   links: [FansubLink]!
   members: [FansubMember]!
@@ -28,13 +29,11 @@ input FansubMediaInput {
 
 
 type FansubLink {
-  id: ID!
   link: String!
-  linkType: LinkType!
+  type: LinkType!
 }
 
 type FansubMember {
-  id: ID!
   name: String!
   role: String
   contact: String
@@ -48,7 +47,7 @@ type Media {
   title: MediaTitle!
   type: MediaType!
   cover: Image
-  description(asHTML: Boolean = false): String
+  description(asHTML: Boolean = true): String
 }
 
 
@@ -81,8 +80,7 @@ type Release {
   id: ID!
   fansub: Fansub!
   media: Media!
-  description(asHTML: Boolean = false): String
-  classifier: String
+  name: String
   timestamp: String
 }
 

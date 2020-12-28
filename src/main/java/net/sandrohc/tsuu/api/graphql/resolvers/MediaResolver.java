@@ -8,9 +8,14 @@ import net.sandrohc.tsuu.api.model.Media;
 import net.sandrohc.tsuu.api.graphql.types.ImageType;
 import net.sandrohc.tsuu.api.graphql.types.MediaTitleType;
 
+@SuppressWarnings("unused")
 @Component
 @RequiredArgsConstructor
 public class MediaResolver implements GraphQLResolver<Media> {
+
+	public String id(Media media) {
+		return media.getId().toHexString();
+	}
 
 	public MediaTitleType title(Media media) {
 		String _default = getDefaultTitle(media);
@@ -37,7 +42,7 @@ public class MediaResolver implements GraphQLResolver<Media> {
 	}
 
 	public String description(Media media, boolean asHTML) {
-		return asHTML ? media.getDescriptionHTML() : media.getDescription();
+		return media.getDescription(); // TODO: strip down HTML if 'asHTML' is false
 	}
 
 }

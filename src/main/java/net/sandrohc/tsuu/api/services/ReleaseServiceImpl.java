@@ -2,6 +2,7 @@ package net.sandrohc.tsuu.api.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.flogger.Flogger;
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -18,13 +19,13 @@ public class ReleaseServiceImpl implements ReleaseService {
 
 
 	@Override
-	public Flux<Release> getAllByFansubId(Long fansubId) {
-		log.atInfo().log("Loading all releases for fansub %d", fansubId);
-		return releaseDao.findAllByFansubIdOrderByTimestampDesc(fansubId);
+	public Flux<Release> getAllByFansubId(ObjectId fansubId) {
+		log.atInfo().log("Loading all releases for fansub %s", fansubId);
+		return releaseDao.findAllByFansubId(fansubId);
 	}
 
 	@Override
-	public Mono<Release> getById(Long id) {
+	public Mono<Release> getById(ObjectId id) {
 		log.atInfo().log("Loading release %d", id);
 		return releaseDao.findById(id);
 	}
@@ -35,4 +36,8 @@ public class ReleaseServiceImpl implements ReleaseService {
 		return releaseDao.save(release);
 	}
 
+	@Override
+	public Flux<Release> saveAll(Iterable<Release> releases) {
+		return releaseDao.saveAll(releases);
+	}
 }

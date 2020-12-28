@@ -2,6 +2,7 @@ package net.sandrohc.tsuu.api.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.flogger.Flogger;
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -24,8 +25,8 @@ public class MediaServiceImpl implements MediaService {
 	}
 
 	@Override
-	public Mono<Media> getById(Long id) {
-		log.atInfo().log("Loading media %d", id);
+	public Mono<Media> getById(ObjectId id) {
+		log.atInfo().log("Loading media %s", id);
 		return mediaDao.findById(id);
 	}
 

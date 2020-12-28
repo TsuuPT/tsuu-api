@@ -5,12 +5,8 @@ spring:
   application:
     name: tsuu-api
   data:
-    postgres:
-      host: ${DB_HOST:localhost}
-      port: ${DB_PORT:5432}
-      database: ${DB_NAME:tsuu}
-      username: ${DB_USER:tsuu}
-      password: ${DB_PASS:tsuu}
+    mongodb:
+      uri: mongodb://${DB_USER:tsuu}:${DB_PASS:tsuu}@${DB_HOST:localhost}:${DB_PORT:27017}/${DB_NAME:tsuu}?authSource=admin
   flyway:
     enabled: true
     sql-migration-separator: '-'

@@ -1,18 +1,39 @@
 package net.sandrohc.tsuu.api.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-@Data
+import lombok.*;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Fansub {
 
-	private @Id Long id;
+	@Id
+	@ToString.Include
+	@EqualsAndHashCode.Include
+	private ObjectId id;
+
+	@Indexed(unique = true)
+	@EqualsAndHashCode.Include
 	private String slug;
+
+	@ToString.Include
 	private String name;
+
+	private String description;
 
 	private String iconSmall;
 	private String iconMedium;
@@ -21,5 +42,23 @@ public class Fansub {
 	private String bannerSmall;
 	private String bannerMedium;
 	private String bannerLarge;
+
+	@Builder.Default
+	private List<FansubLink> links = new ArrayList<>(0);
+
+	@Builder.Default
+	private List<FansubMember> members = new ArrayList<>(0);
+
+
+	private int createdBy;
+	private OffsetDateTime createdAt;
+
+	private Integer modifiedBy;
+	private OffsetDateTime modifiedAt;
+
+	private boolean deleted;
+	private Integer deletedBy;
+	private OffsetDateTime deletedAt;
+	private String deletedReason;
 
 }

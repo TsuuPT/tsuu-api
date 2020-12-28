@@ -5,8 +5,9 @@ import java.time.OffsetDateTime;
 import lombok.*;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import net.sandrohc.tsuu.api.model.enums.ReviewStatus;
 
 @Document
 @Getter
@@ -16,26 +17,22 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @ToString(onlyExplicitlyIncluded = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Release {
+public class FansubRevision {
 
 	@Id
 	@ToString.Include
 	@EqualsAndHashCode.Include
 	private ObjectId id;
 
-	@Indexed
-	@ToString.Include
-	@EqualsAndHashCode.Include
-	private ObjectId fansubId;
+	private Fansub fansub;
 
-	@ToString.Include
-	@EqualsAndHashCode.Include
-	private ObjectId mediaId;
+	private int createdBy;
+	private OffsetDateTime createdAt;
 
-	@ToString.Include
-	private String name; // e.g. "Ep. 1"
+	private int reviewedBy;
+	private OffsetDateTime reviewedAt;
 
-	private String link;
-	private OffsetDateTime timestamp;
+	private ReviewStatus status;
+	private String comment;
 
 }

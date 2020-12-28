@@ -7,35 +7,32 @@ import com.coxautodev.graphql.tools.GraphQLResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import net.sandrohc.tsuu.api.graphql.loaders.FansubToLinksDataLoader;
-import net.sandrohc.tsuu.api.graphql.loaders.FansubToMembersDataLoader;
 import net.sandrohc.tsuu.api.graphql.loaders.FansubToReleasesDataLoader;
-import net.sandrohc.tsuu.api.model.Fansub;
-import net.sandrohc.tsuu.api.model.FansubLink;
-import net.sandrohc.tsuu.api.model.FansubMember;
-import net.sandrohc.tsuu.api.model.Release;
+import net.sandrohc.tsuu.api.model.*;
 import net.sandrohc.tsuu.api.graphql.types.FansubMediaType;
 import net.sandrohc.tsuu.api.graphql.types.ImageType;
 
+@SuppressWarnings("unused")
 @Component
 @RequiredArgsConstructor
 public class FansubResolver implements GraphQLResolver<Fansub> {
 
 	private final FansubToReleasesDataLoader fansubToReleasesDataLoader;
-	private final FansubToLinksDataLoader fansubToLinksDataLoader;
-	private final FansubToMembersDataLoader fansubToMembersDataLoader;
 
+	public String id(Fansub fansub) {
+		return fansub.getId().toHexString();
+	}
 
 	public CompletableFuture<List<Release>> releases(Fansub fansub) {
 		return fansubToReleasesDataLoader.load(fansub);
 	}
 
-	public CompletableFuture<List<FansubLink>> links(Fansub fansub) {
-		return fansubToLinksDataLoader.load(fansub);
+	public List<FansubLink> links(Fansub fansub) {
+		return fansub.getLinks(); // TODO: use CompletableFuture?
 	}
 
-	public CompletableFuture<List<FansubMember>> members(Fansub fansub) {
-		return fansubToMembersDataLoader.load(fansub);
+	public List<FansubMember> members(Fansub fansub) {
+		return fansub.getMembers(); // TODO: use CompletableFuture?
 	}
 
 	public FansubMediaType media(Fansub fansub) {
@@ -43,6 +40,10 @@ public class FansubResolver implements GraphQLResolver<Fansub> {
 				new ImageType(fansub.getIconSmall(), fansub.getIconMedium(), fansub.getIconLarge()),
 				new ImageType(fansub.getBannerSmall(), fansub.getBannerMedium(), fansub.getBannerLarge())
 		);
+	}
+
+	public String description(Fansub fansub, boolean asHTML) {
+		return fansub.getDescription(); // TODO: strip down HTML if 'asHTML' is false
 	}
 
 }
