@@ -7,4 +7,6 @@ public enum LinkType {
 	TWITTER,
 	INSTAGRAM,
 	DISCORD,
+	YOUTUBE,
+	SKYPE,
 }

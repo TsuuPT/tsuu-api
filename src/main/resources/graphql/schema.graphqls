@@ -73,6 +73,8 @@ enum LinkType {
   TWITTER
   INSTAGRAM
   DISCORD
+  YOUTUBE
+  SKYPE
 }
 
 
@@ -100,7 +102,7 @@ input ImageInput {
 
 type Query {
   fansubs: [Fansub]
-  fansub(slug: String!): Fansub!
+  fansub(slug: String!): Fansub
 
   medias: [Media]!
   media(id: String!): Media
