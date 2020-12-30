@@ -17,7 +17,7 @@ import net.sandrohc.tsuu.api.services.ReleaseService;
 @Component
 public class FansubToReleasesDataLoader extends DataLoader<Fansub, List<Release>> {
 
-	@Autowired(required=false)
+	@Autowired
 	public FansubToReleasesDataLoader(ReleaseService releaseService) {
 		super(batchLoader(releaseService));
 	}

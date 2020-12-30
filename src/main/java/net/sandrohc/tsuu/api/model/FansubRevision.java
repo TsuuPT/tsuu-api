@@ -7,7 +7,7 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import net.sandrohc.tsuu.api.model.enums.ReviewStatus;
+import net.sandrohc.tsuu.api.model.enums.RevisionStatus;
 
 @Document
 @Getter
@@ -32,7 +32,7 @@ public class FansubRevision {
 	private int reviewedBy;
 	private OffsetDateTime reviewedAt;
 
-	private ReviewStatus status;
+	private RevisionStatus status;
 	private String comment;
 
 }

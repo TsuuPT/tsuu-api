@@ -15,7 +15,7 @@ import net.sandrohc.tsuu.api.services.MediaService;
 @Component
 public class ReleaseToMediaDataLoader extends DataLoader<Release, Media> {
 
-	@Autowired(required=false)
+	@Autowired
 	public ReleaseToMediaDataLoader(MediaService mediaService) {
 		super(batchLoader(mediaService));
 	}

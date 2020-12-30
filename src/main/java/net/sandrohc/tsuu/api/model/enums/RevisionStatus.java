@@ -1,6 +1,6 @@
 package net.sandrohc.tsuu.api.model.enums;
 
-public enum ReviewStatus {
+public enum RevisionStatus {
 	PENDING,
 	APPROVED,
 	REJECTED,

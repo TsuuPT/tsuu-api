@@ -7,13 +7,16 @@ type Fansub {
   links: [FansubLink]!
   members: [FansubMember]!
   releases: [Release]!
+  revisions(onlyPending: Boolean = true, onlyMine: Boolean = false): [FansubRevision]
 }
 
 input FansubInput {
+  id: ID!
   name: String!
-#  media: FansubMediaInput
-  founder: String
-  foundedDate: String
+  description: String
+#  media: FansubMediaInput! # TODO: update the DTO/model with this new entity
+  links: [FansubLinkInput]!
+  members: [FansubMemberInput]!
 }
 
 
@@ -33,11 +36,36 @@ type FansubLink {
   type: LinkType!
 }
 
+input FansubLinkInput {
+  link: String!
+  type: LinkType!
+}
+
+
 type FansubMember {
   name: String!
   role: String
   contact: String
   contactType: LinkType
+}
+
+input FansubMemberInput {
+  name: String!
+  role: String
+  contact: String
+  contactType: LinkType
+}
+
+
+type FansubRevision {
+  id: ID!
+  fansub: Fansub!
+  createdBy: Int! # TODO: change type to User
+  createdAt: String!
+  reviewedBy: Int # TODO: change type to User
+  reviewedAt: String
+  status: RevisionStatus!
+  comment: String
 }
 
 
@@ -77,6 +105,12 @@ enum LinkType {
   SKYPE
 }
 
+enum RevisionStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
 
 type Release {
   id: ID!
@@ -113,7 +147,9 @@ type Query {
 
 
 type Mutation {
-   createFansub(fansub: FansubInput): Fansub
+  approveFansubRevision(revisionId: ID): String
+  rejectFansubRevision(revisionId: ID, reason: String): String
+  saveFansubRevision(revisionId: ID, fansub: FansubInput!): FansubRevision
 }
 
 
