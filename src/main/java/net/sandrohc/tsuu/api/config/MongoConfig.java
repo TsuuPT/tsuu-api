@@ -31,12 +31,19 @@ public class MongoConfig {
 		ReactiveIndexOperations fansubOps = reactiveMongoTemplate.indexOps(Fansub.class);
 		fansubOps.ensureIndex(new Index().on("slug", Sort.Direction.ASC).unique()).subscribe();
 
+		ReactiveIndexOperations fansubRevisionOps = reactiveMongoTemplate.indexOps(FansubRevision.class);
+		fansubRevisionOps.ensureIndex(new Index().on("status", Sort.Direction.ASC)).subscribe();
+		fansubRevisionOps.ensureIndex(new Index().on("createdAt", Sort.Direction.ASC)).subscribe();
+		fansubRevisionOps.ensureIndex(new Index().on("fansub._id", Sort.Direction.ASC)).subscribe();
+
 		ReactiveIndexOperations mediaOps = reactiveMongoTemplate.indexOps(Media.class);
 		mediaOps.ensureIndex(new Index().on("slug", Sort.Direction.ASC).on("type", Sort.Direction.ASC).unique()).subscribe();
 		mediaOps.ensureIndex(new Index().on("type", Sort.Direction.ASC)).subscribe();
 
 		ReactiveIndexOperations releaseOps = reactiveMongoTemplate.indexOps(Release.class);
-		releaseOps.ensureIndex(new Index().on("fansub.$id", Sort.Direction.ASC)).subscribe();
+		releaseOps.ensureIndex(new Index().on("timestamp", Sort.Direction.ASC)).subscribe();
+		releaseOps.ensureIndex(new Index().on("fansubId", Sort.Direction.ASC)).subscribe();
+		releaseOps.ensureIndex(new Index().on("mediaId", Sort.Direction.ASC)).subscribe();
 	}
 
 	private void createCollections(Class<?>... classes) {

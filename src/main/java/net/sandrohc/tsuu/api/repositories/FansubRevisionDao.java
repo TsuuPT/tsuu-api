@@ -12,10 +12,14 @@ import net.sandrohc.tsuu.api.model.enums.RevisionStatus;
 @Repository
 public interface FansubRevisionDao extends ReactiveMongoRepository<FansubRevision, ObjectId> {
 
-	@Query("{ 'fansub.id': ObjectId('?0') }")
+	@Query(value = "{ 'fansub._id': ObjectId('?0') }", sort = "{ createdAt: -1 }")
 	Flux<FansubRevision> findAllByFansubId(ObjectId fansubId);
 
-	@Query("{ 'fansub.id': ObjectId('?0'), status: '?0' }")
+	@Query(value = "{ status: '?0' }", sort = "{ createdAt: -1 }")
+	Flux<FansubRevision> findAllByStatus(RevisionStatus status);
+
+	@Query(value = "{ 'fansub._id': ObjectId('?0'), status: '?0' }", sort = "{ createdAt: -1 }")
 	Flux<FansubRevision> findAllByFansubIdAndStatus(ObjectId fansubId, RevisionStatus status);
+
 
 }

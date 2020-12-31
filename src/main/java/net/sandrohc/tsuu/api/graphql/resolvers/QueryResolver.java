@@ -8,9 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Component;
 
-import net.sandrohc.tsuu.api.model.Fansub;
 import net.sandrohc.tsuu.api.model.Media;
 import net.sandrohc.tsuu.api.model.Release;
+import net.sandrohc.tsuu.api.model.dto.FansubDTO;
+import net.sandrohc.tsuu.api.model.mapper.FansubMapper;
 import net.sandrohc.tsuu.api.services.FansubService;
 import net.sandrohc.tsuu.api.services.MediaService;
 import net.sandrohc.tsuu.api.services.ReleaseService;
@@ -24,13 +25,15 @@ public class QueryResolver implements GraphQLQueryResolver {
 	private final MediaService mediaService;
 	private final ReleaseService releaseService;
 
+	private final FansubMapper fansubMapper;
 
-	public CompletableFuture<List<Fansub>> fansubs() {
-		return fansubService.getAll().collectList().toFuture();
+
+	public CompletableFuture<List<FansubDTO>> fansubs() {
+		return fansubService.getAll().map(fansubMapper::toDTO).collectList().toFuture();
 	}
 
-	public CompletableFuture<Fansub> fansub(String slug) {
-		return fansubService.getBySlug(slug).toFuture();
+	public CompletableFuture<FansubDTO> fansub(String slug) {
+		return fansubService.getBySlug(slug).map(fansubMapper::toDTO).toFuture();
 	}
 
 

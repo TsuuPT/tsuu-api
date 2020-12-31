@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 
 import net.sandrohc.tsuu.api.graphql.loaders.ReleaseToFansubDataLoader;
 import net.sandrohc.tsuu.api.graphql.loaders.ReleaseToMediaDataLoader;
-import net.sandrohc.tsuu.api.model.Fansub;
 import net.sandrohc.tsuu.api.model.Media;
 import net.sandrohc.tsuu.api.model.Release;
+import net.sandrohc.tsuu.api.model.dto.FansubDTO;
 
 @SuppressWarnings("unused")
 @Component
@@ -25,12 +25,12 @@ public class ReleaseResolver implements GraphQLResolver<Release> {
 		return release.getId().toHexString();
 	}
 
-	public CompletableFuture<Fansub> fansub(Release release) {
-		return releaseToFansubDataLoader.load(release);
+	public CompletableFuture<FansubDTO> fansub(Release release) {
+		return releaseToFansubDataLoader.load(release.getFansubId().toHexString());
 	}
 
 	public CompletableFuture<Media> media(Release release) {
-		return releaseToMediaDataLoader.load(release);
+		return releaseToMediaDataLoader.load(release.getMediaId());
 	}
 
 }

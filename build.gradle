@@ -26,10 +26,14 @@ dependencies {
 	// Spring Boot
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.springframework.boot:spring-boot-starter-cache'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
 //	implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
 //	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+
+	// Cache
+	implementation 'com.github.ben-manes.caffeine:caffeine'
 
 	// Lombok
 	compileOnly 'org.projectlombok:lombok:1.18.16'
